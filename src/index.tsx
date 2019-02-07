@@ -5,8 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import supermarket from "./reducers/supermarket";
 import {createStore} from "redux";
+import initialState from "./initialState";
 
-const store = createStore(supermarket)
+const store = createStore(supermarket, initialState,
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 
