@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import {Link, NavLink} from "react-router-dom";
 
-class Menu extends Component {
+interface OwnProps {
+    categories: Array<Category>
+}
+
+class Menu extends Component<OwnProps> {
     render() {
+        const { categories } = this.props
+        console.log(categories)
         return (
             <div>
-                Here will be menu
+                {categories.map((c) => (
+                    <NavLink to={'/' + c.id} key={c.name + c.id} activeClassName='active'>{c.name}</NavLink>
+                ))}
             </div>
         );
     }
 }
 
-export default Menu;
+export default Menu

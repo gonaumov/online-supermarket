@@ -7,7 +7,7 @@ import Home from "./components/Home"
 const App = ({ store }) => (
     <Provider store={store}>
       <Router>
-        <Route path="/" component={Home} />
+        <Route path="/:categoryId?" component={Home} />
       </Router>
     </Provider>
 )

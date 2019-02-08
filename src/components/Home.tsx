@@ -1,28 +1,31 @@
-import React, { Component } from 'react';
-import logo from '../logo.svg';
+import React, {Component} from 'react';
 import '../App.css';
+import {connect, Provider} from 'react-redux'
+import Menu from "./Menu";
+import categories from "../selectors/categories";
 
-class Home extends Component {
+interface OwnProps {
+    categories: Array<Category>
+}
+
+class Home extends Component<OwnProps> {
     render() {
+        const {categories} = this.props
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to reload.
-                    </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn React
-                    </a>
-                </header>
-            </div>
+            <>
+                <Menu categories={categories}/>
+                <div className="App">
+                    Here will be application content
+                </div>
+            </>
         );
     }
 }
 
-export default Home;
+const mapStateToProps = (state: State, ownProps: any) => {
+    return {
+        categories: categories(state, ownProps)
+    }
+}
+
+export default connect(mapStateToProps)(Home);
