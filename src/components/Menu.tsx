@@ -8,7 +8,6 @@ interface OwnProps {
 class Menu extends Component<OwnProps> {
     render() {
         const { categories } = this.props
-        console.log(categories)
         return (
             <div>
                 {categories.map((c) => (

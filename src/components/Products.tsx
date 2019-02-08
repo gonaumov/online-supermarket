@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
+import categories from "../selectors/categories";
+import products from "../selectors/products";
+import {connect, MapStateToPropsParam} from "react-redux";
+import {match, NavLink} from "react-router-dom";
 
-class Products extends Component {
+interface StateProps {
+    products: Array<Product>
+}
+
+interface OwnProps {
+    match: match<{categoryId: string | undefined}>
+}
+
+class Products extends Component<OwnProps & StateProps> {
     render() {
+        const { products } = this.props
         return (
-            <div>
-                Here will products list
-            </div>
+            <ul>
+                {products.map((product) => (
+                    <li key={product.categoryId + product.name}>{product.name}</li>
+                ))}
+            </ul>
         );
     }
 }
 
-export default Products;
+const mapStateToProps: MapStateToPropsParam<StateProps, OwnProps, State> = (state: State, ownProps) => {
+    return {
+        products: products(state, ownProps.match)
+    }
+}
+
+export default connect(mapStateToProps)(Products)

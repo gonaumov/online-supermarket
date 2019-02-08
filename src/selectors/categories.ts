@@ -1,11 +1,13 @@
+// routeParams: match<{categoryId: string | undefined}>
+import {match} from "react-router";
 
-const categories = (state: State, ownProps: any): Array<Category> => {
-    if(typeof ownProps.match.params.categoryId === 'undefined') {
+const categories = (state: State, routeParams: match<{categoryId: string | undefined}>): Array<Category> => {
+    if(typeof routeParams.params.categoryId === 'undefined') {
         return state.categories
     }
 
     // @ts-ignore
-    return state.categories.map((category) => (category.id === ownProps.match.params.categoryId ? {
+    return state.categories.map((category) => (category.id === routeParams.params.categoryId ? {
         'id': category.id,
         'name': category.name,
         'selected': true
