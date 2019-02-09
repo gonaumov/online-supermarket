@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import products from "../selectors/products";
-import {connect, MapDispatchToPropsNonObject, MapStateToPropsParam} from "react-redux";
+import {connect, MapDispatchToProps, MapDispatchToPropsNonObject, MapStateToPropsParam} from "react-redux";
 import {match} from "react-router-dom";
 import {toggleProductVisibility} from "../actions/actions";
 
@@ -41,7 +41,7 @@ const mapStateToProps: MapStateToPropsParam<StateProps, OwnProps, State> = (stat
     }
 }
 
-const mapDispatchToProps: MapDispatchToPropsNonObject<TDispatchProps, OwnProps> = (dispatch: any) => {
+const mapDispatchToProps: MapDispatchToProps<TDispatchProps, OwnProps> = (dispatch: any) => {
     return {
         tpgleDescription: (id: string) => {
             dispatch(toggleProductVisibility(id))

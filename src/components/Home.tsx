@@ -5,6 +5,7 @@ import Menu from "./Menu";
 import categories from "../selectors/categories";
 import { match } from "react-router";
 import Products from "./Products";
+import SearchInput from "./SearchInput";
 
 interface OwnProps {
     categories: Array<Category>
@@ -18,6 +19,7 @@ class Home extends Component<OwnProps> {
             <>
                 <Menu categories={categories}/>
                 <div className="App">
+                    <SearchInput/>
                     <Products match={match}/>
                 </div>
             </>
