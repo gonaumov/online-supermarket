@@ -1,5 +1,5 @@
 import {AnyAction} from "redux";
-import {SET_SEARCH_TEXT, TOGGLE_PRODUCT_VISIBILITY} from "../constants/ActionTypes";
+import {GET_CATEGORIES, GET_PRODUCTS, SET_SEARCH_TEXT, TOGGLE_PRODUCT_VISIBILITY} from "../constants/ActionTypes";
 import initialState from "../initialState";
 
 const supermaket = (state: State = initialState, action: AnyAction) => {
@@ -26,6 +26,25 @@ const supermaket = (state: State = initialState, action: AnyAction) => {
                 ...state,
                 search: null
             }
+        case GET_CATEGORIES:
+            if(action.payload) {
+                return {
+                    ...state,
+                    categories: action.payload
+                }
+            }
+
+            return state
+        case GET_PRODUCTS:
+            if(action.payload) {
+                return {
+                    ...state,
+                    products: action.payload
+                }
+            }
+
+            return state
+
         default:
             return state
     }
