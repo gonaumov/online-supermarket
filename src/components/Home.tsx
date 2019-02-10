@@ -6,13 +6,21 @@ import categories from "../selectors/categories";
 import { match } from "react-router";
 import Products from "./Products";
 import SearchInput from "./SearchInput";
+import {getCategoriesAction} from "../actions/actions";
 
 interface OwnProps {
     categories: Array<Category>
     match: match<{categoryId: string | undefined}>
 }
 
-class Home extends Component<OwnProps> {
+interface TDispatchProps {
+    loadCategories: any
+}
+
+class Home extends Component<OwnProps & TDispatchProps> {
+    componentDidMount() {
+        this.props.loadCategories()
+    }
     render() {
         const {categories, match} = this.props
         return (
@@ -33,4 +41,10 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch: any) => ({
+    loadCategories: () => {
+        return dispatch(getCategoriesAction())
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
