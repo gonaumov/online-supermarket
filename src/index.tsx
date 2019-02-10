@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import supermarket from "./reducers/supermarket";
-import {createStore} from "redux";
+import { createStore, applyMiddleware, compose  } from "redux";
+import thunk from 'redux-thunk'
 import initialState from "./initialState";
 
-const store = createStore(supermarket, initialState,
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__())
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(supermarket, initialState, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(<App store={store} />, document.getElementById('root'));
 
