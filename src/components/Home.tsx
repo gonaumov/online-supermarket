@@ -6,7 +6,7 @@ import categories from "../selectors/categories";
 import { match } from "react-router";
 import Products from "./Products";
 import SearchInput from "./SearchInput";
-import {getCategoriesAction} from "../actions/actions";
+import {getCategoriesAction, getProductsAction} from "../actions/actions";
 
 interface OwnProps {
     categories: Array<Category>
@@ -15,11 +15,14 @@ interface OwnProps {
 
 interface TDispatchProps {
     loadCategories: any
+    loadProducts: any
 }
 
 class Home extends Component<OwnProps & TDispatchProps> {
     componentDidMount() {
-        this.props.loadCategories()
+        this.props.loadCategories().then(() => {
+            this.props.loadProducts()
+        })
     }
     render() {
         const {categories, match} = this.props
@@ -44,6 +47,9 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => {
 const mapDispatchToProps = (dispatch: any) => ({
     loadCategories: () => {
         return dispatch(getCategoriesAction())
+    },
+    loadProducts: () => {
+        return dispatch(getProductsAction())
     }
 })
 

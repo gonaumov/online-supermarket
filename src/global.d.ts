@@ -6,7 +6,7 @@ interface Category {
 
 interface Product {
     name: string
-    categoryId: string
+    categoryId: Array<string>
     id: string
     description: string
     selected: boolean

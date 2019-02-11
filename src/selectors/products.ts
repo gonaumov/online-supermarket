@@ -11,10 +11,10 @@ const products = (state: State, routeParams: match<{categoryId: string | undefin
 
     // @ts-ignore
     return typeof state.search === 'string' || state.search instanceof String ?
-        state.products.filter((product) => (product.categoryId === routeParams.params.categoryId))
+        state.products.filter((product: Product) => (product.categoryId.includes(routeParams.params.categoryId as string)))
             .filter((product) => (product.description.includes(state.search!) ||
             product.name.includes(state.search!))) :
-        state.products.filter((product) => (product.categoryId === routeParams.params.categoryId))
+        state.products.filter((product) => (product.categoryId.includes(routeParams.params.categoryId as string)))
 
 }
 

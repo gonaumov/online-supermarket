@@ -33,3 +33,24 @@ export const getCategoriesAction = () => {
         })
     };
 };
+
+export const getProductsAction = () => {
+    return (dispatch: any) => {
+        return fetch('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i' +
+            'mage_sizes[]=400&period_id=120').then(async (data) => {
+            const result = await data.json()
+            const products = result.data.map((product: any) => {
+                const categoryId = product.categories.map((category: any) => (category.id))
+
+                return {
+                    id: product.id,
+                    selected: false,
+                    name: product.title,
+                    categoryId,
+                    description: product.description
+                }
+            }) as Array<Product>
+            dispatch(getProducts(products))
+        })
+    };
+};
