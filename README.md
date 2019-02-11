@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+I have implemented all requirements except tests. The application is divided in 
+four components - Home, Menu, Products and SearchInput. I use redux and first 
+designed the shape of the state and develop only with mock data. I needed to 
+change implementation a little bit because firstly my state shape was
+designed to maintain only one group
+
 ## Available Scripts
 
 In the project directory, you can run:
