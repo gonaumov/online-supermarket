@@ -21,7 +21,7 @@ class SearchInput extends Component<StateProps & TDispatchProps> {
         const {search, setSearch} = this.props
 
         return (
-            <div>
+            <div className='searchinput'>
                 <input type='text' value={search !== null ? search : ''}
                        onChange={(e: any ) => { e.preventDefault();setSearch(e.target.value)}}
                 />

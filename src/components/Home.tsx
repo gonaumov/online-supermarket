@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../App.css';
 import { connect } from 'react-redux'
 import Menu from "./Menu";
 import categories from "../selectors/categories";
@@ -27,13 +26,13 @@ class Home extends Component<OwnProps & TDispatchProps> {
     render() {
         const {categories, match} = this.props
         return (
-            <>
+            <div className='container'>
                 <Menu categories={categories}/>
-                <div className="App">
+                <div className="app">
                     <SearchInput/>
                     <Products match={match}/>
                 </div>
-            </>
+            </div>
         );
     }
 }

@@ -9,7 +9,7 @@ class Menu extends Component<OwnProps> {
     render() {
         const { categories } = this.props
         return (
-            <div>
+            <div className='menu'>
                 {categories.map((c) => (
                     <NavLink to={'/' + c.id} key={c.name + c.id} activeClassName='active'>{c.name}</NavLink>
                 ))}

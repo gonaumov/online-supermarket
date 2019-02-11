@@ -21,11 +21,11 @@ class Products extends Component<OwnProps & StateProps & TDispatchProps> {
     render() {
         const {products, tpgleDescription} = this.props
         return (
-            <ul>
+            <ul className='productlist'>
                 {products.map((product) => (
                     <React.Fragment key={product.categoryId + 'productKey' + product.id}>
-                        <li onClick={() => tpgleDescription(product.id)}>{product.name}</li>
-                        {product.selected && <li key={product.categoryId + product.name}>
+                        <li className='product' onClick={() => tpgleDescription(product.id)}>{product.name}</li>
+                        {product.selected && <li className='productdescription' key={product.categoryId + product.name}>
                             {product.description}
                         </li>}
                     </React.Fragment>
