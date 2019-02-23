@@ -6,7 +6,7 @@ import Home from "./components/Home";
 
 const App = ({store}: {store: Store<State, AnyAction>}) => (
     <Provider store={store}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Route path="/:categoryId?" component={Home} />
       </Router>
     </Provider>
