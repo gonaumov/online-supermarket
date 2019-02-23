@@ -5,7 +5,7 @@ and there was need the human resources specialist which I was working to write t
 not comment this. I am happy I didn't write tests because the time which I spend would be longer
 and the result will be the same. In master branch you can find the task as it was given to them.
 A quick Google search can find that they are giving the same task from years. 
-There was need to install [Allow-Control-Allow-Origi](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) 
+There was need to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) 
 from Chrome web store in order to use crossdomain fetch. This is currently not possible even with this add-on. 
 In the static-without-any-version branch you can find improved version which can be started locally. It just 
 requests json files from filesystem and have improved typing. There is not usage of any in the codebase.
