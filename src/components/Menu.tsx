@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import {Link, NavLink} from "react-router-dom";
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 
-interface OwnProps {
-    categories: Array<Category>
+interface IOwnProps {
+    categories: Category[];
 }
 
-class Menu extends Component<OwnProps> {
-    render() {
-        const { categories } = this.props
+class Menu extends Component<IOwnProps> {
+    public render() {
+        const { categories } = this.props;
         return (
-            <div className='menu'>
+            <div className="menu">
                 {categories.map((c) => (
-                    <NavLink to={'/' + c.id} key={c.name + c.id} activeClassName='active'>{c.name}</NavLink>
+                    <NavLink to={"/" + c.id} key={c.title + c.id} activeClassName="active">{c.title}</NavLink>
                 ))}
             </div>
         );
     }
 }
 
-export default Menu
+export default Menu;

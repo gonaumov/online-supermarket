@@ -1,21 +1,23 @@
 import {match} from "react-router";
+import {filterProductsByCategoryFactory} from "../utils";
 
-const products = (state: State, routeParams: match<{categoryId: string | undefined}>): Array<Product> => {
-    if(typeof routeParams.params.categoryId === 'undefined') {
-        // @ts-ignore
-        return typeof state.search === 'string' || state.search instanceof String  ?
+const products = (state: State, routeParams: match<{categoryId: string | undefined}>): Product[] => {
+    if (typeof routeParams.params.categoryId === "undefined") {
+        return typeof state.search === "string" || state.search !== null  ?
             state.products.filter((product) => (product.description.includes(state.search!) ||
-                product.name.includes(state.search!))) :
-            state.products
+                product.title.includes(state.search!))) :
+            state.products;
     }
 
-    // @ts-ignore
-    return typeof state.search === 'string' || state.search instanceof String ?
-        state.products.filter((product: Product) => (product.categoryId.includes(routeParams.params.categoryId as string)))
-            .filter((product) => (product.description.includes(state.search!) ||
-            product.name.includes(state.search!))) :
-        state.products.filter((product) => (product.categoryId.includes(routeParams.params.categoryId as string)))
+    const filterProductsByCategory = filterProductsByCategoryFactory(routeParams.params.categoryId);
 
-}
+    return typeof state.search === "string" || state.search !== null ?
+        filterProductsByCategory(state.products).
+        filter((product) => (product.description.includes(state.search!) ||
+            product.title.includes(state.search!)))
+        :
+        filterProductsByCategory(state.products);
 
-export default products
+};
+
+export default products;

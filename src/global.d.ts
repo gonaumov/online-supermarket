@@ -1,13 +1,15 @@
-interface Category {
-    name: string
+interface Entity {
     id: string
+}
+
+interface Category extends Entity {
+    title: string
     selected: boolean
 }
 
-interface Product {
-    name: string
-    categoryId: Array<string>
-    id: string
+interface Product extends Entity {
+    title: string
+    categories: Array<Entity>
     description: string
     selected: boolean
 }

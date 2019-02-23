@@ -1,32 +1,34 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import Menu from "./Menu";
-import categories from "../selectors/categories";
+import React, {Component} from "react";
+import { connect } from "react-redux";
 import { match } from "react-router";
+import { Action, AnyAction} from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import {getCategoriesAction, getProductsAction} from "../actions/actions";
+import categories from "../selectors/categories";
+import Menu from "./Menu";
 import Products from "./Products";
 import SearchInput from "./SearchInput";
-import {getCategoriesAction, getProductsAction} from "../actions/actions";
 
-interface OwnProps {
-    categories: Array<Category>
-    match: match<{categoryId: string | undefined}>
+interface IOwnProps {
+    categories: Category[];
+    match: match<{categoryId: string | undefined}>;
 }
 
-interface TDispatchProps {
-    loadCategories: any
-    loadProducts: any
+interface ITDispatchProps {
+    loadCategories: () => Promise<Action>;
+    loadProducts: () => Promise<Action>;
 }
 
-class Home extends Component<OwnProps & TDispatchProps> {
-    componentDidMount() {
+class Home extends Component<IOwnProps & ITDispatchProps> {
+    public componentDidMount() {
         this.props.loadCategories().then(() => {
-            this.props.loadProducts()
-        })
+            this.props.loadProducts();
+        });
     }
-    render() {
-        const {categories, match} = this.props
+    public render() {
+        const {categories, match} = this.props;
         return (
-            <div className='container'>
+            <div className="container">
                 <Menu categories={categories}/>
                 <div className="app">
                     <SearchInput/>
@@ -37,19 +39,19 @@ class Home extends Component<OwnProps & TDispatchProps> {
     }
 }
 
-const mapStateToProps = (state: State, ownProps: OwnProps) => {
+const mapStateToProps = (state: State, ownProps: IOwnProps) => {
     return {
-        categories: categories(state, ownProps.match)
-    }
-}
+        categories: categories(state, ownProps.match),
+    };
+};
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<State, {}, AnyAction>) => ({
     loadCategories: () => {
-        return dispatch(getCategoriesAction())
+        return dispatch(getCategoriesAction());
     },
     loadProducts: () => {
-        return dispatch(getProductsAction())
-    }
-})
+        return dispatch(getProductsAction());
+    },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

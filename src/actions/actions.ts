@@ -1,56 +1,58 @@
-import {GET_CATEGORIES, GET_PRODUCTS, SET_SEARCH_TEXT, TOGGLE_PRODUCT_VISIBILITY} from "../constants/ActionTypes"
+import { Dispatch } from "redux";
+import {Action, ActionCreator, AnyAction} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {GET_CATEGORIES, GET_PRODUCTS, SET_SEARCH_TEXT, TOGGLE_PRODUCT_VISIBILITY} from "../constants/ActionTypes";
 
 export const toggleProductVisibility = (id: string) => ({
+    id,
     type: TOGGLE_PRODUCT_VISIBILITY,
-    id
-})
+});
 
 export const setSearchText = (search: string) => ({
+    search,
     type: SET_SEARCH_TEXT,
-    search
-})
+});
 
-const getCategories  = (categories: Array<Category>) => ({
+const getCategories = (categories: Category[]) => ({
+    payload: categories,
     type: GET_CATEGORIES,
-    payload: categories
-})
+});
 
-const getProducts = (products: Array<Product>) => ({
+const getProducts = (products: Product[]) => ({
+    payload: products,
     type: GET_PRODUCTS,
-    payload: products
-})
+});
 
-export const getCategoriesAction = () => {
-    return (dispatch: any) => {
-        return fetch('https://api.gousto.co.uk/products/v2.0/categories').then(async (data) => {
-            const result = await data.json()
-            const categories = result.data.map((category: any) => ({
-                name: category.title,
+export const getCategoriesAction: ActionCreator<ThunkAction<Promise<Action>, State, {}, AnyAction>> = () => {
+        return (dispatch: Dispatch): Promise<Action> => {
+        return fetch("categories.json").then(async (data) => {
+            const result = await data.json();
+            const categories: Category[] = result.data.map((category: Category): Category => ({
+                id: category.id,
                 selected: false,
-                id: category.id
-            })) as Array<Category>
-            dispatch(getCategories(categories))
-        })
+                title: category.title,
+            }));
+            return dispatch(getCategories(categories));
+        });
     };
 };
 
-export const getProductsAction = () => {
-    return (dispatch: any) => {
-        return fetch('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i' +
-            'mage_sizes[]=400&period_id=120').then(async (data) => {
-            const result = await data.json()
-            const products = result.data.map((product: any) => {
-                const categoryId = product.categories.map((category: any) => (category.id))
-
-                return {
-                    id: product.id,
-                    selected: false,
-                    name: product.title,
-                    categoryId,
-                    description: product.description
-                }
-            }) as Array<Product>
-            dispatch(getProducts(products))
-        })
+export const getProductsAction: ActionCreator<ThunkAction<Promise<Action>, State, {}, AnyAction>> = () => {
+    return async (dispatch: Dispatch): Promise<Action> => {
+        const data = await fetch("products.json");
+        const result = await data.json();
+        const products: Product[] = result.data.map((product: Product): Product => {
+            const categories: Entity[] = product.categories.map((category: Entity): Entity => ({
+                id: category.id,
+            }));
+            return {
+                categories,
+                description: product.description,
+                id: product.id,
+                selected: false,
+                title: product.title,
+            };
+        });
+        return dispatch(getProducts(products));
     };
 };

@@ -10,44 +10,44 @@ const supermaket = (state: State = initialState, action: AnyAction) => {
                 products: state.products.map((product) => (
                     product.id === action.id ? {
                         ...product,
-                        selected: !product.selected
+                        selected: !product.selected,
                     } : product
-                ))
-            }
+                )),
+            };
         case SET_SEARCH_TEXT:
             if (action.search && action.search !== null) {
                 return {
                     ...state,
-                    search: action.search
-                }
+                    search: action.search,
+                };
             }
 
             return {
                 ...state,
-                search: null
-            }
+                search: null,
+            };
         case GET_CATEGORIES:
-            if(action.payload) {
+            if (action.payload) {
                 return {
                     ...state,
-                    categories: action.payload
-                }
+                    categories: action.payload,
+                };
             }
 
-            return state
+            return state;
         case GET_PRODUCTS:
-            if(action.payload) {
+            if (action.payload) {
                 return {
                     ...state,
-                    products: action.payload
-                }
+                    products: action.payload,
+                };
             }
 
-            return state
+            return state;
 
         default:
-            return state
+            return state;
     }
-}
+};
 
-export default supermaket
+export default supermaket;

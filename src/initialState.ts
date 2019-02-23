@@ -1,7 +1,7 @@
 const initialState: State = {
     categories: [],
     products: [],
-    search: null
-}
+    search: null,
+};
 
-export default initialState
+export default initialState;
