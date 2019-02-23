@@ -2,12 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This is a task which I did for [Gusto](https://www.gousto.co.uk/). I didn't receive any feedback
 and there was need the human resources specialist which I was working to write to them. I will 
-not comment this. I am happy I didn't write tests because the time which I spend would be much long
-and the result will be the same. In master branch you can find the task as it was given to them. 
+not comment this. I am happy I didn't write tests because the time which I spend would be longer
+and the result will be the same. In master branch you can find the task as it was given to them.
+A quick Google search can find that they are giving the same task from years. 
 There was need to install [Allow-Control-Allow-Origi](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) 
 from Chrome web store in order to use crossdomain fetch. This is currently not possible even with this add-on. 
 In the static-without-any-version branch you can find improved version which can be started locally. It just 
-requests json files from filesystem. 
+requests json files from filesystem and have improved typing. There is not usage of any in the codebase.
+You can find this version deployed [here](http://gonaumov.github.io/online-supermarket) as a Github page. 
 
 
 I have implemented all requirements except tests. The application is divided in 
